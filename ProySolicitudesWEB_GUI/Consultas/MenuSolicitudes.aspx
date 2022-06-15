@@ -1,4 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/DemoMaster.master" AutoEventWireup="true" CodeBehind="MenuSolicitudes.aspx.cs" Inherits="ProySolicitudesWEB_GUI.MenuSolicitudes" %>
+<%@ Register assembly="AjaxControlToolkit" namespace="AjaxControlToolkit" tagprefix="ajaxToolkit" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <style type="text/css">
     .encabezados{
@@ -57,7 +58,7 @@
         <asp:Label ID="lblBienvenida" runat="server"></asp:Label>
         </strong>
     </h2>
-    <div class="principal">
+    <h4 class="principal">
         <h3 style="color:#092749; font-size: 30px">¿Que consulta desea hacer el dia de hoy?</h3>
         <!--<div class="tarjetas">
             <div class="tarjeta">
@@ -87,7 +88,22 @@
                             <asp:Button ID="Button5" runat="server" CssClass="btn btn-dark" PostBackUrl="~/Consultas/EvalCliente.aspx" Text="Ir a Evaluación Cliente" />
                         </td>
                     </tr>
-                    <%--<tr>
+                    <tr>
+                        <td class="auto-style9">
+                            </td>
+                        <td class="auto-style10">
+                            </td>
+                    </tr>
+                    <tr>
+                        <td class="auto-style7"; style="color: #092749; padding:20px">
+                            <h4 style="font-weight:700; font-size:25px">
+                                Descargue reporte garantias:</h4>
+                        </td>
+                        <td style="text-align:center" class="auto-style8">
+                            <asp:Button ID="btnDescarga" runat="server" CssClass="btn btn-dark" OnClick="btnDescarga_Click" Text="Descargar excel" />
+                        </td>
+                    </tr>
+                    <tr>
                         <td class="auto-style9">
                             </td>
                         <td class="auto-style10">
@@ -103,7 +119,29 @@
             <asp:Button ID="Button7" runat="server" CssClass="btn btn-dark" PostBackUrl="~/Consultas/ReporteAnalista.aspx" Text="Ir a Reporte Analista" />
                         </td>
                     </tr>
+
                     <tr>
+                        <td class="auto-style9">
+                            </td>
+                        <td class="auto-style10">
+                            </td>
+                    </tr>
+                    <tr>
+                        <td class="auto-style4"; style="color: #092749; padding:20px">
+                <h4 style="font-weight:700; font-size:25px">Ranking de analistas</h4>
+                <p>Para un buen control de las solicitudes atendidas o que faltan atender por los colaboradoes a su cargo</p>
+                <p>Obtenga una vista del desempeño de los analistas</p>
+                        </td>
+                        <td style="text-align:center" class="auto-style5">
+            <asp:Button ID="Button1" runat="server" CssClass="btn btn-dark" PostBackUrl="~/Consultas/RankingAnalista.aspx" Text="Ir a Ranking Analista" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="4" class="color: white; font-size: 25px;">
+                            <asp:Label ID="lblMensaje" runat="server" CssClass="alert-danger"></asp:Label>
+                        </td>
+                    </tr>
+                    <%--<tr>
                         <td class="auto-style4">
                             &nbsp;</td>
                         <td class="auto-style5">
@@ -151,4 +189,56 @@
         </table>
         
     </div>
+    <%--Este es el modal popup que contiene los mensajes --%>        <%--1 Control target (cualquier control)--%>
+
+       <asp:LinkButton ID="lnkMensaje" runat="server" ></asp:LinkButton>
+
+         <%--2 el panel que se mostrara en el popup--%>
+
+       <asp:Panel ID="pnlMensaje" runat="server" CssClass="CajaDialogo" Style="display: normal;" Width="300"> 
+
+          <table border="0" width="300px" style="margin: 0px; padding: 0px; background-color:darkred ; 
+
+            color: #FFFFFF;"> 
+
+            <tr> 
+
+              <td align="center"> 
+
+                <asp:Label ID="lblTitulo" runat="server" Text="Mensaje" /> 
+
+              </td> 
+
+              <td width="12%"> 
+
+                <asp:ImageButton ID="btnCerrar" runat="server" ImageUrl="~/Images/Cancelar.png" Style="vertical-align: top;" 
+
+                  ImageAlign="Right" /> 
+
+              </td> 
+
+            </tr> 
+
+             
+
+          </table> 
+
+          <div> 
+
+            <asp:Label ID="Label1" runat="server" Text="" ForeColor ="Black" /> 
+
+          </div> 
+
+          <div> 
+
+            <asp:Button ID="btnAceptar" runat="server" Text="Aceptar" /> 
+
+          </div> 
+
+        </asp:Panel> 
+
+     <%--3 el Modal popup que hace referencia al control target (1) y al panel (2)--%>
+        <ajaxToolkit:ModalPopupExtender ID="mpeMensaje" runat="server" TargetControlID="lnkMensaje" 
+
+          PopupControlID="pnlMensaje" BackgroundCssClass="FondoAplicacion" OkControlID="btnAceptar" />
 </asp:Content>

@@ -15,13 +15,13 @@ namespace ProySolicitudesWEB_GUI.Consultas
     {
 
         /// <summary>
-        /// Control txtIdCli.
+        /// Control cboCliente.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtIdCli;
+        protected global::System.Web.UI.WebControls.DropDownList cboCliente;
 
         /// <summary>
         /// Control btnBuscar.
@@ -33,24 +33,6 @@ namespace ProySolicitudesWEB_GUI.Consultas
         protected global::System.Web.UI.WebControls.Button btnBuscar;
 
         /// <summary>
-        /// Control CustomValidator1.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.CustomValidator CustomValidator1;
-
-        /// <summary>
-        /// Control btnDescarga.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnDescarga;
-
-        /// <summary>
         /// Control txtCod.
         /// </summary>
         /// <remarks>
@@ -58,15 +40,6 @@ namespace ProySolicitudesWEB_GUI.Consultas
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtCod;
-
-        /// <summary>
-        /// Control txtApellido.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtApellido;
 
         /// <summary>
         /// Control txtDNI.

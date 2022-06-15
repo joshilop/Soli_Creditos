@@ -26,12 +26,14 @@ namespace ProySolicitudesWEB_GUI.Consultas
         {
             try
             {
-                ScriptManager scriptManager = ScriptManager.GetCurrent(this.Page);
-                scriptManager.RegisterPostBackControl(this.btnDescarga);
                 if (Page.IsPostBack == false)
                 {
                     dtv = new DataView(objGarantiaBL.ListarGarantia());
                     Session["Vista"] = dtv;
+                    cboCliente.DataSource = objClienteBL.ListarCliente();
+                    cboCliente.DataValueField = "Id_cli";
+                    cboCliente.DataTextField = "ApellNombres";
+                    cboCliente.DataBind();
                     //CargarDatos("");
                     //Cambiando
                     /*cboCliente.DataSource = objClienteBL.ListarCliente();
@@ -39,7 +41,7 @@ namespace ProySolicitudesWEB_GUI.Consultas
                     cboCliente.DataTextField = "ApellNombres";
                     cboCliente.DataBind();*/
 
-                    
+
                     /*lblInfoIngr.Text = "Estas son todos los ingresos: ";                    
                     grvIngresos.DataSource = objIngresoBL.ListarIngreso();
                     grvIngresos.DataBind();
@@ -63,34 +65,19 @@ namespace ProySolicitudesWEB_GUI.Consultas
             }
         }
 
-        private void CargarDatos(String strFiltro)
-        {
-            dtv = (DataView)Session["Vista"];
-            dtv.RowFilter = "Id_cli like '%" + strFiltro + "%'";
-            grvGarantia.DataSource = dtv;
-            grvGarantia.DataBind();
-
-            if (grvGarantia.Rows.Count == 0)
-            {
-                lblMensaje.Text = "No existen registros con el filtro indicado";
-                mpeMensaje.Show();
-            }
-        }
-
         protected void btnBuscar_Click(object sender, EventArgs e)
         {
             try
             {
                 //Cambios
-                objClienteBE = objClienteBL.ConsultarCliente(txtIdCli.Text);
+                objClienteBE = objClienteBL.ConsultarCliente(cboCliente.SelectedValue);
 
                 //Cambiado
                 /*objClienteBE = objClienteBL.ConsultarCliente(cboCliente.SelectedValue);*/
-                txtCod.Text = objClienteBE.Nom_cli;
-                txtApellido.Text = objClienteBE.Ape_cli;
-                txtDNI.Text = objClienteBE.Dni_cli;
+                txtCod.Text = objClienteBE.Id_cli;
                 txtEdad.Text = objClienteBE.Edad.ToString();
                 txtEmail.Text = objClienteBE.Email;
+                txtDNI.Text = objClienteBE.Dni_cli;
                 txtEstCivil.Text = objClienteBE.Est_Civ;
                 txtRUC.Text = objClienteBE.Ruc_cli;
 
@@ -129,78 +116,6 @@ namespace ProySolicitudesWEB_GUI.Consultas
             {
                 lblTitulo.Text = "Error";
                 Label1.Text = "Error " + ex.Message;
-                mpeMensaje.Show();
-            }
-        }
-
-        protected void CustomValidator1_ServerValidate(object source, ServerValidateEventArgs args)
-        {
-            if(txtIdCli.Text.StartsWith("C") & txtIdCli.Text.Length == 7)
-            {
-                args.IsValid = true;
-            }
-            else
-            {
-                args.IsValid = false;
-            }
-        }
-
-        protected void btnDescarga_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                // Ruta del archivo plantilla del reporte en desarrollo
-                String rutaarchivo = Server.MapPath("/") + @"Consultas\ListadoProveedores.xlsx";
-                // Ruta del archivo plantilla en produccion (publicado)
-                //String rutaarchivo = Server.MapPath("/") + @"SitioVentasWEB_GUI\Mantenimientos\ListadoProveedores.xlsx";
-
-                // Obtenemos los proveedores
-                DataTable dtClientes = new DataTable();
-                dtClientes = objGarantiaBL.ListarGarantia();
-                // fila de inicio del reporte
-                Int16 fila1 = 5;
-                using (var pck = new OfficeOpenXml.ExcelPackage(new FileInfo(rutaarchivo)))
-                {
-                    ////Nombre de archivo para descargar
-                    String filename = "ListadoGarantias-" + DateTime.Today.ToShortDateString();
-                    ExcelWorksheet ws = pck.Workbook.Worksheets["Hoja1"];
-
-                    ////llenamos el Excel con los proveedores
-                    foreach (DataRow drProveedor in dtClientes.Rows)
-                    {
-                        ws.Cells[fila1, 1].Value = drProveedor["Id_cli"].ToString();
-                        ws.Cells[fila1, 2].Value = drProveedor["Tip_Garantia"].ToString();
-                        ws.Cells[fila1, 3].Value = drProveedor["Des_garantia"].ToString();
-                        ws.Cells[fila1, 4].Value = drProveedor["Valor_garantia"].ToString();
-                        /*ws.Cells[fila1, 5].Value = drProveedor["Departamento"].ToString() + "-" + drProveedor["Provincia"].ToString() + "-" +
-                                                                 drProveedor["Distrito"].ToString();
-                        ws.Cells[fila1, 6].Value = drProveedor["Rep_ven"].ToString();*/
-                        fila1 += 1;
-                    }
-
-                    ////modificando el ancho de las columnas
-                    ws.Column(1).Width = 30;
-                    ws.Column(2).Width = 50;
-                    ws.Column(3).Width = 50;
-                    ws.Column(4).Width = 40;
-                    ws.Column(5).Width = 45;
-                    ws.Column(6).Width = 45;
-
-                    //Escribir de nuevo al cliente y descargar el archivo desde el navegador
-                    Response.Clear();
-                    Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
-                    Response.AddHeader("content-disposition", "attachment;  filename=" + filename + ".xlsx");
-                    using (var memoryStream = new MemoryStream())
-                    {
-                        pck.SaveAs(memoryStream);
-                        memoryStream.WriteTo(Response.OutputStream);
-                    }
-                    Response.End();
-                }
-            }
-            catch (Exception ex)
-            {
-                lblMensaje.Text = ex.Message;
                 mpeMensaje.Show();
             }
         }

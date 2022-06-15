@@ -32,27 +32,29 @@
     <h3 class="encabezados" style="font-size: 25px; font-weight: 700;">Evaluación de clientes</h3>
 <table class="auto-style1">
     <tr>
-        <td style="color: #092749; font-size: 30px; font-weight:600">Codigo del cliente:</td>
-        <td>
-            <asp:TextBox ID="txtIdCli" runat="server"></asp:TextBox>
-        </td>
-        <td>
+        <td style="color: #092749; font-size: 30px; font-weight:600">Seleccione cliente a evaluar:</td>
+        <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td>
+                <asp:DropDownList ID="cboCliente" runat="server" Width="343px" CssClass="btn btn-secondary dropdown-toggle">
+                </asp:DropDownList>
+            </td>
+            <td>
             <asp:Button ID="btnBuscar" runat="server" Text="Buscar" Width="131px" OnClick="btnBuscar_Click" CssClass="btn btn-outline-dark" />
-        </td>
-        <td>
-            <asp:CustomValidator ID="CustomValidator1" runat="server" ControlToValidate="txtIdCli" CssClass="alert-danger" ErrorMessage="*El codigo debe empezar con C y tener 7 caracteres" OnServerValidate="CustomValidator1_ServerValidate"></asp:CustomValidator>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <div class="dropdown" style="color: #092749; font-size: 25px;">
-                Descargue reporte garantias:</div>
-        </td>
-        <td>
-            <asp:Button ID="btnDescarga" runat="server" CssClass="btn btn-outline-dark" OnClick="btnDescarga_Click" Text="Descargar excel" />
-        </td>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
+            </td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+        </tr>
+        
+        <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
     </tr>
     <tr>
         <td>
@@ -62,24 +64,15 @@
         <td>&nbsp;</td>
     </tr>
     <tr>
-        <td class="auto-style2" style="color: #092749; font-size: 25px;">Nombres:</td>
-        <td>
-            <asp:TextBox ID="txtCod" runat="server" ReadOnly="True"></asp:TextBox>
-        </td>
-        <td style="color: white; font-size: 25px;">&nbsp;</td>
-        <td>
-            &nbsp;</td>
-    </tr>
-    <tr>
-        <td class="auto-style2" style="color: #092749; font-size: 25px;">Apellido:</td>
-        <td>
-            <asp:TextBox ID="txtApellido" runat="server" ReadOnly="True"></asp:TextBox>
-        </td>
-        <td style="color: #092749; font-size: 25px;">DNI:</td>
-        <td>
-            <asp:TextBox ID="txtDNI" runat="server" ReadOnly="True"></asp:TextBox>
-        </td>
-    </tr>
+            <td style="color: #092749; font-size: 25px;">Codigo:</td>
+            <td>
+                <asp:TextBox ID="txtCod" runat="server" ReadOnly="True"></asp:TextBox>
+            </td>
+            <td style="color: #092749; font-size: 25px;">DNI:</td>
+            <td>
+                <asp:TextBox ID="txtDNI" runat="server" ReadOnly="True"></asp:TextBox>
+            </td>
+        </tr>
     <tr>
         <td style="color: #092749; font-size: 25px;">RUC:</td>
         <td>
